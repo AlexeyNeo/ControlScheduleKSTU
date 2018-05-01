@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{62E72A21-1548-4E58-A97E-20C400C07532}</ProjectGuid>
+    <ProjectGuid>{E66F77FE-2F23-4CB9-9571-F7C96ABDB5C5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ControlScheduleKSTU.DomainCore</RootNamespace>
-    <AssemblyName>ControlScheduleKSTU.DomainCore</AssemblyName>
+    <RootNamespace>ControlScheduleKSTU.Service</RootNamespace>
+    <AssemblyName>ControlScheduleKSTU.Service</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,9 +43,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Enums\" />
-    <Folder Include="Models\" />
-    <Folder Include="Resourses\" />
+    <ProjectReference Include="..\ControlScheduleKSTU.DAL\ControlScheduleKSTU.DAL.csproj">
+      <Project>{6bbd7ba5-253e-4dd6-8c57-e8ce0f7243ad}</Project>
+      <Name>ControlScheduleKSTU.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ControlScheduleKSTU.DomainCore\ControlScheduleKSTU.DomainCore.csproj">
+      <Project>{62e72a21-1548-4e58-a97e-20c400c07532}</Project>
+      <Name>ControlScheduleKSTU.DomainCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
