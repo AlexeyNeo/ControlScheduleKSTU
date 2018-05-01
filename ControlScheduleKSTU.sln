@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlScheduleKSTU.WebAPI"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlScheduleKSTU.WebApp", "ControlScheduleKSTU.WebApp\ControlScheduleKSTU.WebApp.csproj", "{56B45840-28C2-418A-9291-E1304DEFAC78}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{7ADF1810-7044-4B28-A227-794CCB2A751D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{06E5BEE1-D296-4FE2-9661-105F4D15F2D0} = {7ADF1810-7044-4B28-A227-794CCB2A751D}
+		{56B45840-28C2-418A-9291-E1304DEFAC78} = {7ADF1810-7044-4B28-A227-794CCB2A751D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0B1B2BF-D872-454E-A110-0F2C87593357}
