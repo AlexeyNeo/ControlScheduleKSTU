@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ControlScheduleKSTU.WebApp.Models
 {
-    // Модели, возвращаемые действиями AccountController.
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
         [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }
-
-        [Display(Name = "Место рождения")]
-        public string Hometown { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -84,9 +79,6 @@ namespace ControlScheduleKSTU.WebApp.Models
         [Display(Name = "Подтверждение пароля")]
         [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают.")]
         public string ConfirmPassword { get; set; }
-
-        [Display(Name = "Место рождения")]
-        public string Hometown { get; set; }
     }
 
     public class ResetPasswordViewModel
