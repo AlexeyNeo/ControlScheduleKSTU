@@ -8,8 +8,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ControlScheduleKSTU.DAL;
+using ControlScheduleKSTU.DomainCore.Resourses;
 
-namespace ControlScheduleKSTU.WepApp.Controllers
+namespace ControlScheduleKSTU.WebApp.Controllers
 {
     [Authorize]
     public class ScheduleRealizationsController : Controller
@@ -20,6 +21,7 @@ namespace ControlScheduleKSTU.WepApp.Controllers
         public async Task<ActionResult> Index()
         {
             var scheduleRealizations = db.ScheduleRealizations.Include(s => s.Auditorium).Include(s => s.Schedule).Include(s => s.Teacher);
+            ViewBag.Title = Resources.MonitoringSchedule;
             return View(await scheduleRealizations.ToListAsync());
         }
 

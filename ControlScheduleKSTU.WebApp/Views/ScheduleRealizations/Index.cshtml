@@ -1,24 +1,20 @@
 ﻿@model IEnumerable<ControlScheduleKSTU.DAL.ScheduleRealization>
 
-@{
-    ViewBag.Title = "Index";
-}
+<h2>@ViewBag.Title</h2>
 
-<h2>Index</h2>
-
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p*@>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Auditorium.Name)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Schedule.Id)
-        </th>
+        </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.Teacher.FirstName)
+            @Html.DisplayName("Преподаватель")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ActualDate)
@@ -32,9 +28,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Location)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -43,11 +39,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Auditorium.Name)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Schedule.Id)
-        </td>
+        </td>*@
         <td>
-            @Html.DisplayFor(modelItem => item.Teacher.FirstName)
+            @Html.DisplayFor(modelItem => item.Teacher.FirstName) @Html.DisplayFor(modelItem => item.Teacher.FirstName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ActualDate)
@@ -61,9 +57,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Location)
-        </td>
+        </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |

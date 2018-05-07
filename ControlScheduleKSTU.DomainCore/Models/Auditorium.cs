@@ -24,10 +24,11 @@ namespace ControlScheduleKSTU.DAL
 
         [Required]
         [StringLength(100)]
+        [Display(Name = "Аудитория")]
         public string Name { get; set; }
 
         public short? DepartmentId { get; set; }
-
+        [Display(Name = "Вместительность")]
         public short SeatingCapacity { get; set; }
 
         public byte? AuditoriumTypeId { get; set; }
