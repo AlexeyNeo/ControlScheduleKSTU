@@ -1,4 +1,4 @@
-namespace ControlScheduleKSTU.DAL
+namespace ControlScheduleKSTU.DomainCore.Models
 {
     using System;
     using System.Collections.Generic;
@@ -13,9 +13,10 @@ namespace ControlScheduleKSTU.DAL
         public Auditorium()
         {
             Raschasovkas = new HashSet<Raschasovka>();
+            RaschasovkaYears = new HashSet<RaschasovkaYear>();
             Schedules = new HashSet<Schedule>();
             ScheduleRealizations = new HashSet<ScheduleRealization>();
-            SubjectWithTypes = new HashSet<SubjectWithType>();
+            ScheduleYears = new HashSet<ScheduleYear>();
         }
 
         public short Id { get; set; }
@@ -24,11 +25,10 @@ namespace ControlScheduleKSTU.DAL
 
         [Required]
         [StringLength(100)]
-        [Display(Name = "Аудитория")]
         public string Name { get; set; }
 
         public short? DepartmentId { get; set; }
-        [Display(Name = "Вместительность")]
+
         public short SeatingCapacity { get; set; }
 
         public byte? AuditoriumTypeId { get; set; }
@@ -47,12 +47,15 @@ namespace ControlScheduleKSTU.DAL
         public virtual ICollection<Raschasovka> Raschasovkas { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RaschasovkaYear> RaschasovkaYears { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Schedule> Schedules { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ScheduleRealization> ScheduleRealizations { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubjectWithType> SubjectWithTypes { get; set; }
+        public virtual ICollection<ScheduleYear> ScheduleYears { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-namespace ControlScheduleKSTU.DAL
+namespace ControlScheduleKSTU.DomainCore.Models
 {
     using System;
     using System.Collections.Generic;
@@ -10,19 +10,17 @@ namespace ControlScheduleKSTU.DAL
     public partial class ScheduleRealization
     {
         public string Id { get; set; }
-        [Display(Name = "Назначенная дата")]
+
         [Column(TypeName = "date")]
-        [DataType(DataType.Date)]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{dd-MM-yy}")]
         public DateTime? ActualDate { get; set; }
-        [Display(Name = "Время начала")]
-        
+
         public TimeSpan? BeginTime { get; set; }
-        [Display(Name = "Время завершения")]
+
         public TimeSpan? EndTime { get; set; }
 
         public int? ScheduleId { get; set; }
-        [Display(Name = "Комментарий преподавателя")]
+
+        [StringLength(256)]
         public string Description { get; set; }
 
         public short? ActualAuditoriumId { get; set; }

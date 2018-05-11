@@ -1,4 +1,4 @@
-namespace ControlScheduleKSTU.DAL
+namespace ControlScheduleKSTU.DomainCore.Models
 {
     using System;
     using System.Collections.Generic;
@@ -13,6 +13,7 @@ namespace ControlScheduleKSTU.DAL
         public Hour()
         {
             Schedules = new HashSet<Schedule>();
+            ScheduleYears = new HashSet<ScheduleYear>();
             TeacherPersonalTimes = new HashSet<TeacherPersonalTime>();
         }
 
@@ -27,6 +28,9 @@ namespace ControlScheduleKSTU.DAL
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Schedule> Schedules { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ScheduleYear> ScheduleYears { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TeacherPersonalTime> TeacherPersonalTimes { get; set; }

@@ -10,7 +10,7 @@ namespace ControlScheduleKSTU.WebApp.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "ScheduleRealizations");
         }
 
         public ActionResult About()

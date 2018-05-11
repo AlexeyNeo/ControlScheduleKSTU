@@ -6,20 +6,16 @@ namespace ControlScheduleKSTU.DomainCore.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("TeacherPersonalTime")]
-    public partial class TeacherPersonalTime
+    [Table("TeacherDepartment")]
+    public partial class TeacherDepartment
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         public int TeacherId { get; set; }
 
-        public byte HourId { get; set; }
+        public short DepartmentId { get; set; }
 
-        public byte DayOfWeekId { get; set; }
-
-        public virtual DayOfWeek DayOfWeek { get; set; }
-
-        public virtual Hour Hour { get; set; }
+        public virtual Department Department { get; set; }
 
         public virtual Teacher Teacher { get; set; }
     }

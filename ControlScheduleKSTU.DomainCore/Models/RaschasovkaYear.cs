@@ -6,15 +6,8 @@ namespace ControlScheduleKSTU.DomainCore.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Raschasovka")]
-    public partial class Raschasovka
+    public partial class RaschasovkaYear
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Raschasovka()
-        {
-            RaschasovkaWeeks = new HashSet<RaschasovkaWeek>();
-        }
-
         public int Id { get; set; }
 
         public int Potok { get; set; }
@@ -37,6 +30,8 @@ namespace ControlScheduleKSTU.DomainCore.Models
 
         public byte SubjectTypeId { get; set; }
 
+        public byte YearId { get; set; }
+
         public virtual Auditorium Auditorium { get; set; }
 
         public virtual Course Course { get; set; }
@@ -53,7 +48,6 @@ namespace ControlScheduleKSTU.DomainCore.Models
 
         public virtual Teacher Teacher { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RaschasovkaWeek> RaschasovkaWeeks { get; set; }
+        public virtual Year Year { get; set; }
     }
 }

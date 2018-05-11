@@ -61,6 +61,15 @@ namespace ControlScheduleKSTU.DomainCore.Resourses {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Система контроля выполнения расписания.
+        /// </summary>
+        public static string AppName {
+            get {
+                return ResourceManager.GetString("AppName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на  Мониторинг проведения учебных занятий.
         /// </summary>
         public static string MonitoringSchedule {

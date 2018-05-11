@@ -1,4 +1,4 @@
-namespace ControlScheduleKSTU.DAL
+namespace ControlScheduleKSTU.DomainCore.Models
 {
     using System;
     using System.Collections.Generic;
@@ -13,33 +13,39 @@ namespace ControlScheduleKSTU.DAL
         public Teacher()
         {
             Raschasovkas = new HashSet<Raschasovka>();
+            RaschasovkaYears = new HashSet<RaschasovkaYear>();
             Schedules = new HashSet<Schedule>();
             ScheduleRealizations = new HashSet<ScheduleRealization>();
+            ScheduleYears = new HashSet<ScheduleYear>();
+            TeacherDepartments = new HashSet<TeacherDepartment>();
             TeacherPersonalTimes = new HashSet<TeacherPersonalTime>();
         }
 
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(30)]
+        [StringLength(40)]
         public string FirstName { get; set; }
 
-        [Required]
-        [StringLength(30)]
+        [StringLength(40)]
         public string LastName { get; set; }
-
-        public short DepartmentId { get; set; }
-
-        public virtual Department Department { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Raschasovka> Raschasovkas { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RaschasovkaYear> RaschasovkaYears { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Schedule> Schedules { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ScheduleRealization> ScheduleRealizations { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ScheduleYear> ScheduleYears { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TeacherDepartment> TeacherDepartments { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TeacherPersonalTime> TeacherPersonalTimes { get; set; }

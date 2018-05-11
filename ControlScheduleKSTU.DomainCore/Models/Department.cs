@@ -1,4 +1,4 @@
-namespace ControlScheduleKSTU.DAL
+namespace ControlScheduleKSTU.DomainCore.Models
 {
     using System;
     using System.Collections.Generic;
@@ -14,8 +14,10 @@ namespace ControlScheduleKSTU.DAL
         {
             Auditoriums = new HashSet<Auditorium>();
             Groups = new HashSet<Group>();
-            Subjects = new HashSet<Subject>();
-            Teachers = new HashSet<Teacher>();
+            Raschasovkas = new HashSet<Raschasovka>();
+            RaschasovkaYears = new HashSet<RaschasovkaYear>();
+            SubjectDepartments = new HashSet<SubjectDepartment>();
+            TeacherDepartments = new HashSet<TeacherDepartment>();
         }
 
         public short Id { get; set; }
@@ -39,9 +41,15 @@ namespace ControlScheduleKSTU.DAL
         public virtual ICollection<Group> Groups { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Subject> Subjects { get; set; }
+        public virtual ICollection<Raschasovka> Raschasovkas { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Teacher> Teachers { get; set; }
+        public virtual ICollection<RaschasovkaYear> RaschasovkaYears { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SubjectDepartment> SubjectDepartments { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TeacherDepartment> TeacherDepartments { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace ControlScheduleKSTU.WebApp.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DbContext", throwIfV1Schema: false)
+            : base("ControlContext", throwIfV1Schema: false)
         {
         }
 

@@ -6,37 +6,26 @@ namespace ControlScheduleKSTU.DomainCore.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("DayOfWeek")]
-    public partial class DayOfWeek
+    public partial class Year
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public DayOfWeek()
+        public Year()
         {
-            Schedules = new HashSet<Schedule>();
+            RaschasovkaYears = new HashSet<RaschasovkaYear>();
             ScheduleYears = new HashSet<ScheduleYear>();
-            TeacherPersonalTimes = new HashSet<TeacherPersonalTime>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public byte Id { get; set; }
 
-        public byte Number { get; set; }
-
         [Required]
         [StringLength(10)]
         public string Name { get; set; }
 
-        [Required]
-        [StringLength(20)]
-        public string FullName { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Schedule> Schedules { get; set; }
+        public virtual ICollection<RaschasovkaYear> RaschasovkaYears { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ScheduleYear> ScheduleYears { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TeacherPersonalTime> TeacherPersonalTimes { get; set; }
     }
 }

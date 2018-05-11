@@ -1,20 +1,23 @@
-﻿@model IEnumerable<ControlScheduleKSTU.DAL.ScheduleRealization>
+﻿@model IEnumerable<ControlScheduleKSTU.DomainCore.Models.ScheduleRealization>
 
 <h2>@ViewBag.Title</h2>
 
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p*@>
-<table class="table">
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        <p>Занятие: №5</p>
+        <p>Текущее время:14:40</p>
+    </div>
+<table class="table table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Auditorium.Name)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Schedule.Id)
-        </th>*@
         <th>
-            @Html.DisplayName("Преподаватель")
+            @Html.DisplayNameFor(model => model.Schedule.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Teacher.FirstName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ActualDate)
@@ -29,43 +32,45 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.Location)
-        </th>*@
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>*@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Auditorium.Name)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Schedule.Id)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.Teacher.FirstName) @Html.DisplayFor(modelItem => item.Teacher.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActualDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BeginTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Location)
-        </td>*@
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Auditorium.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Schedule.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Teacher.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActualDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BeginTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            @*<td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>*@
+            @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                    </td>*@
+        </tr>
+    }
 
 </table>
+</div>
