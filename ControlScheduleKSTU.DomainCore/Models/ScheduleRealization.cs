@@ -1,4 +1,4 @@
-namespace ControlScheduleKSTU.DAL
+namespace ControlScheduleKSTU.DomainCore.Models
 {
     using System;
     using System.Collections.Generic;

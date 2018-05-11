@@ -6,15 +6,8 @@ namespace ControlScheduleKSTU.DomainCore.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Schedule")]
-    public partial class Schedule
+    public partial class ScheduleYear
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Schedule()
-        {
-            ScheduleRealizations = new HashSet<ScheduleRealization>();
-        }
-
         public int Id { get; set; }
 
         public byte HourId { get; set; }
@@ -40,6 +33,8 @@ namespace ControlScheduleKSTU.DomainCore.Models
 
         public byte SemesterId { get; set; }
 
+        public byte YearId { get; set; }
+
         public virtual Auditorium Auditorium { get; set; }
 
         public virtual DayOfWeek DayOfWeek { get; set; }
@@ -58,7 +53,6 @@ namespace ControlScheduleKSTU.DomainCore.Models
 
         public virtual Week Week { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ScheduleRealization> ScheduleRealizations { get; set; }
+        public virtual Year Year { get; set; }
     }
 }

@@ -6,26 +6,21 @@ namespace ControlScheduleKSTU.DomainCore.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Faculty")]
-    public partial class Faculty
+    public partial class AspNetRole
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Faculty()
+        public AspNetRole()
         {
-            Departments = new HashSet<Department>();
+            AspNetUsers = new HashSet<AspNetUser>();
         }
 
-        public short Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
-        [StringLength(100)]
+        [StringLength(256)]
         public string Name { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string FullName { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Department> Departments { get; set; }
+        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
 }

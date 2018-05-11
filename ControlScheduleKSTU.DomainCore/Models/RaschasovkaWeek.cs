@@ -6,17 +6,16 @@ namespace ControlScheduleKSTU.DomainCore.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("CourseGroup")]
-    public partial class CourseGroup
+    public partial class RaschasovkaWeek
     {
         public long Id { get; set; }
 
-        public byte CourseId { get; set; }
+        public int RaschasovkaId { get; set; }
 
-        public long GroupId { get; set; }
+        public byte WeekId { get; set; }
 
-        public virtual Course Course { get; set; }
+        public virtual Raschasovka Raschasovka { get; set; }
 
-        public virtual Group Group { get; set; }
+        public virtual Week Week { get; set; }
     }
 }

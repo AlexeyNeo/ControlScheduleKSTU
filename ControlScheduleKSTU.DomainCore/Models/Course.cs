@@ -1,4 +1,4 @@
-namespace ControlScheduleKSTU.DAL
+namespace ControlScheduleKSTU.DomainCore.Models
 {
     using System;
     using System.Collections.Generic;
@@ -14,6 +14,7 @@ namespace ControlScheduleKSTU.DAL
         {
             CourseGroups = new HashSet<CourseGroup>();
             Raschasovkas = new HashSet<Raschasovka>();
+            RaschasovkaYears = new HashSet<RaschasovkaYear>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -26,5 +27,8 @@ namespace ControlScheduleKSTU.DAL
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Raschasovka> Raschasovkas { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RaschasovkaYear> RaschasovkaYears { get; set; }
     }
 }
