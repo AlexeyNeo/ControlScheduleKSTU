@@ -70,6 +70,15 @@ namespace ControlScheduleKSTU.DomainCore.Resourses {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Имя пользователя или пароль указаны неправильно..
+        /// </summary>
+        public static string LoginOrPasswordIsIncorrect {
+            get {
+                return ResourceManager.GetString("LoginOrPasswordIsIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на  Мониторинг проведения учебных занятий.
         /// </summary>
         public static string MonitoringSchedule {
