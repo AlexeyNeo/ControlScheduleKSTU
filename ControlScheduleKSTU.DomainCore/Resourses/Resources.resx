@@ -120,6 +120,9 @@
   <data name="AppName" xml:space="preserve">
     <value>Система контроля выполнения расписания</value>
   </data>
+  <data name="LoginOrPasswordIsIncorrect" xml:space="preserve">
+    <value>Имя пользователя или пароль указаны неправильно.</value>
+  </data>
   <data name="MonitoringSchedule" xml:space="preserve">
     <value> Мониторинг проведения учебных занятий</value>
   </data>

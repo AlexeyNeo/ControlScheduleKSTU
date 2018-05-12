@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется следующим образом
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанных с этой сборкой.
-[assembly: AssemblyTitle("ControlScheduleKSTU.WebAPI")]
+[assembly: AssemblyTitle("ControlScheduleKSTU.WebAPI.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ControlScheduleKSTU.WebAPI")]
+[assembly: AssemblyProduct("ControlScheduleKSTU.WebAPI.Tests")]
 [assembly: AssemblyCopyright("© , 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для ID библиотеки типов typelib, если этот проект видим для COM
-[assembly: Guid("ee05a902-0221-453c-bf7d-14204c53c8a2")]
+[assembly: Guid("0222e5b8-b735-4a78-9ce2-5c2ce6b3f0ab")]
 
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //
