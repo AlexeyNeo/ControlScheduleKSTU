@@ -18,22 +18,31 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
         [Route("api/Auditorium/GetAuditoriumBuilding")]
         public async Task<List<AuditoriumViewModel>> GetAuditoriumBuilding(int buildingId)
         {
-            return await _auditoriumService.GetAuditoriumInBuilding(buildingId);
+            var auditoriums = await _auditoriumService.GetAuditoriumInBuilding(buildingId);
+            if(!auditoriums.Any())
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
+            return auditoriums;
         }
-
+       // HttpResponseException(new HttpResponseMessage(HttpStatusCode.NoContent));
         // GET api/<controller>/5
         [HttpGet]
         [Route("api/Auditorium/Building/{id:int}/AuditoriumType")]
         public async Task<List<AuditoriumViewModel>> GetAuditoriumByAuditoriumType(int id, int auditoriumTypeId)
         {
-            return await _auditoriumService.GetAuditoriumByAuditoriumType(id, auditoriumTypeId);
+            var auditoriums = await _auditoriumService.GetAuditoriumByAuditoriumType(id, auditoriumTypeId);
+            if(!auditoriums.Any())
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
+            return auditoriums;
         }
 
         [HttpGet]
         [Route("api/Auditorium/Search")]
         public async Task<List<AuditoriumViewModel>> AuditoriumSearch(string name)
         {
-            return await _auditoriumService.SearchByName(name);
+            var auditory = await _auditoriumService.SearchByName(name);
+            if(!auditory.Any())
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
+            return auditory;
         }
 
         // POST api/<controller>

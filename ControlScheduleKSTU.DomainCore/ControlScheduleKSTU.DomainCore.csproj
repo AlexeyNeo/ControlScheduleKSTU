@@ -52,6 +52,7 @@
     <Compile Include="Enums\AuditoriumTypeEnum.cs" />
     <Compile Include="Enums\RolesEnum.cs" />
     <Compile Include="ModelsView\AuditoriumViewModel.cs" />
+    <Compile Include="ModelsView\TeacherViewModel.cs" />
     <Compile Include="Models\AspNetRole.cs" />
     <Compile Include="Models\AspNetUser.cs" />
     <Compile Include="Models\AspNetUserClaim.cs" />
