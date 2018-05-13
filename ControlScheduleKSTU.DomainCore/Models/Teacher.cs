@@ -19,6 +19,8 @@ namespace ControlScheduleKSTU.DomainCore.Models
             ScheduleYears = new HashSet<ScheduleYear>();
             TeacherDepartments = new HashSet<TeacherDepartment>();
             TeacherPersonalTimes = new HashSet<TeacherPersonalTime>();
+            AspNetUsers = new HashSet<AspNetUser>();
+
         }
 
         public int Id { get; set; }
@@ -49,5 +51,7 @@ namespace ControlScheduleKSTU.DomainCore.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TeacherPersonalTime> TeacherPersonalTimes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
 }

@@ -6,16 +6,22 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using ControlScheduleKSTU.DomainCore.Enums;
 using ControlScheduleKSTU.DomainCore.ModelsView;
+using ControlScheduleKSTU.WebAPI.Infrastructure;
 
 namespace ControlScheduleKSTU.WebAPI.Controllers
 {
+    [MyAuthorize(RolesEnum = RolesEnum.Teacher)]
+  
     public class AuditoriumController : ApiController
     {
         private readonly AuditoriumService _auditoriumService = new AuditoriumService();
         // GET api/<controller>
         [HttpGet]
         [Route("api/Auditorium/GetAuditoriumBuilding")]
+       
+        //[MyAuthorize(RolesEnum = RolesEnum.Teacher)]
         public async Task<List<AuditoriumViewModel>> GetAuditoriumBuilding(int buildingId)
         {
             var auditoriums = await _auditoriumService.GetAuditoriumInBuilding(buildingId);
@@ -27,6 +33,7 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
         // GET api/<controller>/5
         [HttpGet]
         [Route("api/Auditorium/Building/{id:int}/AuditoriumType")]
+        
         public async Task<List<AuditoriumViewModel>> GetAuditoriumByAuditoriumType(int id, int auditoriumTypeId)
         {
             var auditoriums = await _auditoriumService.GetAuditoriumByAuditoriumType(id, auditoriumTypeId);

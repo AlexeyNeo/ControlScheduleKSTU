@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using ControlScheduleKSTU.DomainCore.Enums;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -29,10 +31,10 @@ namespace ControlScheduleKSTU.WebAPI
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
+              //  RequireNonLetterOrDigit = true,
+                //RequireDigit = true,
+               // RequireLowercase = true,
+               // RequireUppercase = true,
             };
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
@@ -40,6 +42,11 @@ namespace ControlScheduleKSTU.WebAPI
                 manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
+        }
+        public async Task<IdentityResult> AddToRolesAsync(string id, RolesEnum rolesEnum)
+        {
+            string[] roles = rolesEnum.ToString().Split(',').Select(r => r.Trim()).ToArray();
+            return await this.AddToRolesAsync(id, roles);
         }
     }
 }

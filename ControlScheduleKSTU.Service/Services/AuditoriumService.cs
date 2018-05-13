@@ -46,46 +46,21 @@ namespace ControlScheduleKSTU.Service.Services
 
         public async Task<List<AuditoriumViewModel>> GetAuditoriumByAuditoriumType(int buildingId, int auditoriumTypeId)
         {
+            IQueryable<Auditorium> query = _context.Auditoriums;
             if (buildingId != 0)
+                query = query.Where(c => c.BuildingId == buildingId);
+            if (auditoriumTypeId != 0)
+                query = query.Where(c => c.AuditoriumTypeId == auditoriumTypeId);
+
+            return await query.Select(m => new AuditoriumViewModel
             {
-                if (auditoriumTypeId == 0)
-                {
-                    
-                    return  await _context.Auditoriums.Where(c => c.BuildingId == buildingId)
-                        .Select(m => new AuditoriumViewModel
-                    {
-                        Id = m.Id,
-                        Name = m.Name,
-                        AuditoriumType = m.AuditoriumType.FullName,
-                        Building = m.Building.FullName,
-                        Department = m.Department.FullName,
-                        SeatingCapacity = m.SeatingCapacity
-                    }).ToListAsync();
-                }
-
-                return await  _context.Auditoriums.Where(c => c.BuildingId == buildingId && c.AuditoriumTypeId == auditoriumTypeId)
-                    .Select(m => new AuditoriumViewModel
-                    {
-                        Id = m.Id,
-                        Name = m.Name,
-                        AuditoriumType = m.AuditoriumType.FullName,
-                        Building = m.Building.FullName,
-                        Department = m.Department.FullName,
-                        SeatingCapacity = m.SeatingCapacity
-                    }).ToListAsync();
-            }
-            return await _context.Auditoriums.Where(c => c.AuditoriumTypeId == auditoriumTypeId)
-                .Select(m => new AuditoriumViewModel
-                {
-                    Id = m.Id,
-                    Name = m.Name,
-                    AuditoriumType = m.AuditoriumType.FullName,
-                    Building = m.Building.FullName,
-                    Department = m.Department.FullName,
-                    SeatingCapacity = m.SeatingCapacity
-                }).ToListAsync();
-
-
+                Id = m.Id,
+                Name = m.Name,
+                AuditoriumType = m.AuditoriumType.FullName,
+                Building = m.Building.FullName,
+                Department = m.Department.FullName,
+                SeatingCapacity = m.SeatingCapacity
+            }).ToListAsync();
         }
 
         public async Task<List<AuditoriumViewModel>> SearchByName(string name)
