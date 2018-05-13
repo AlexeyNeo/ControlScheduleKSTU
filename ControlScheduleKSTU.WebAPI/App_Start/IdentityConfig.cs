@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using ControlScheduleKSTU.DomainCore.Enums;
+using ControlScheduleKSTU.DomainCore.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -17,6 +18,7 @@ namespace ControlScheduleKSTU.WebAPI
             : base(store)
         {
         }
+
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {

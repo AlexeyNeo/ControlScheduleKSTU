@@ -1,12 +1,9 @@
+using System.Data.Entity;
 using ControlScheduleKSTU.DomainCore.Models;
+using DayOfWeek = ControlScheduleKSTU.DomainCore.Models.DayOfWeek;
 
 namespace ControlScheduleKSTU.DAL
 {
-    using System;
-    using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
-
     public partial class ControlContext : DbContext
     {
         public ControlContext()
@@ -14,17 +11,13 @@ namespace ControlScheduleKSTU.DAL
         {
         }
 
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Auditorium> Auditoriums { get; set; }
         public virtual DbSet<AuditoriumType> AuditoriumTypes { get; set; }
         public virtual DbSet<Building> Buildings { get; set; }
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<CourseGroup> CourseGroups { get; set; }
-        public virtual DbSet<DomainCore.Models.DayOfWeek> DayOfWeeks { get; set; }
+        public virtual DbSet<Criterion> Criteria { get; set; }
+        public virtual DbSet<DayOfWeek> DayOfWeeks { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Faculty> Faculties { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
@@ -48,21 +41,6 @@ namespace ControlScheduleKSTU.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AspNetRole>()
-                .HasMany(e => e.AspNetUsers)
-                .WithMany(e => e.AspNetRoles)
-                .Map(m => m.ToTable("AspNetUserRoles").MapLeftKey("RoleId").MapRightKey("UserId"));
-
-            modelBuilder.Entity<AspNetUser>()
-                .HasMany(e => e.AspNetUserClaims)
-                .WithRequired(e => e.AspNetUser)
-                .HasForeignKey(e => e.UserId);
-
-            modelBuilder.Entity<AspNetUser>()
-                .HasMany(e => e.AspNetUserLogins)
-                .WithRequired(e => e.AspNetUser)
-                .HasForeignKey(e => e.UserId);
-
             modelBuilder.Entity<Auditorium>()
                 .HasMany(e => e.Schedules)
                 .WithRequired(e => e.Auditorium)
@@ -93,17 +71,17 @@ namespace ControlScheduleKSTU.DAL
                 .WithRequired(e => e.Course)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<DomainCore.Models.DayOfWeek>()
+            modelBuilder.Entity<DayOfWeek>()
                 .HasMany(e => e.Schedules)
                 .WithRequired(e => e.DayOfWeek)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<DomainCore.Models.DayOfWeek>()
+            modelBuilder.Entity<DayOfWeek>()
                 .HasMany(e => e.ScheduleYears)
                 .WithRequired(e => e.DayOfWeek)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<DomainCore.Models.DayOfWeek>()
+            modelBuilder.Entity<DayOfWeek>()
                 .HasMany(e => e.TeacherPersonalTimes)
                 .WithRequired(e => e.DayOfWeek)
                 .WillCascadeOnDelete(false);

@@ -14,6 +14,8 @@ namespace ControlScheduleKSTU.DomainCore.Models
 
         public byte WeekId { get; set; }
 
+        public byte HoursForWeek { get; set; }
+
         public virtual Raschasovka Raschasovka { get; set; }
 
         public virtual Week Week { get; set; }

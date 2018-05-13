@@ -37,6 +37,8 @@ namespace ControlScheduleKSTU.DomainCore.Models
 
         public byte SubjectTypeId { get; set; }
 
+        public byte NumberOfStudents { get; set; }
+
         public virtual Auditorium Auditorium { get; set; }
 
         public virtual Course Course { get; set; }

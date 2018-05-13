@@ -32,6 +32,9 @@ namespace ControlScheduleKSTU.WebAPI.Models
         public bool HasRegistered { get; set; }
 
         public string LoginProvider { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string UserType { get; set; }
     }
 
     public class UserLoginInfoViewModel
