@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -7,6 +9,11 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
+using System.Web.Mvc;
+using ControlScheduleKSTU.DAL;
+using ControlScheduleKSTU.DomainCore.Enums;
+using ControlScheduleKSTU.DomainCore.Models;
+using ControlScheduleKSTU.Service.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -19,12 +26,13 @@ using ControlScheduleKSTU.WebAPI.Results;
 
 namespace ControlScheduleKSTU.WebAPI.Controllers
 {
-    [Authorize]
-    [RoutePrefix("api/Account")]
+    [System.Web.Http.Authorize]
+    [System.Web.Http.RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private readonly ControlContext _context = new ControlContext();
 
         public AccountController()
         {
@@ -53,21 +61,28 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
 
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [Route("UserInfo")]
-        public UserInfoViewModel GetUserInfo()
+        [System.Web.Http.Route("UserInfo")]
+        public async Task<UserInfoViewModel> GetUserInfo()
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
+            var test = User.Identity.GetUserId();
+            var user =  _context.AspNetUsers.FirstOrDefault(c => c.Id == test);
+            var userinfo = await _context.Teachers.FirstOrDefaultAsync(c => c.Id == user.TeacherId);
             return new UserInfoViewModel
             {
                 Email = User.Identity.GetUserName(),
                 HasRegistered = externalLogin == null,
-                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
+                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null,
+                UserType = user.AspNetRoles.FirstOrDefault().Name,
+                LastName = userinfo?.LastName ?? "",
+                FirstName =userinfo?.FirstName?? ""
+
+
             };
         }
 
         // POST api/Account/Logout
-        [Route("Logout")]
+        [System.Web.Http.Route("Logout")]
         public IHttpActionResult Logout()
         {
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
@@ -75,7 +90,7 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
         }
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
-        [Route("ManageInfo")]
+        [System.Web.Http.Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
             IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
@@ -115,7 +130,7 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
         }
 
         // POST api/Account/ChangePassword
-        [Route("ChangePassword")]
+        [System.Web.Http.Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -135,7 +150,7 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
         }
 
         // POST api/Account/SetPassword
-        [Route("SetPassword")]
+        [System.Web.Http.Route("SetPassword")]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -154,7 +169,7 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
         }
 
         // POST api/Account/AddExternalLogin
-        [Route("AddExternalLogin")]
+        [System.Web.Http.Route("AddExternalLogin")]
         public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -192,7 +207,7 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
         }
 
         // POST api/Account/RemoveLogin
-        [Route("RemoveLogin")]
+        [System.Web.Http.Route("RemoveLogin")]
         public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -221,10 +236,10 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
         }
 
         // GET api/Account/ExternalLogin
-        [OverrideAuthentication]
+        [System.Web.Http.OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
-        [AllowAnonymous]
-        [Route("ExternalLogin", Name = "ExternalLogin")]
+        [System.Web.Http.AllowAnonymous]
+        [System.Web.Http.Route("ExternalLogin", Name = "ExternalLogin")]
         public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
         {
             if (error != null)
@@ -278,8 +293,8 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
         }
 
         // GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
-        [AllowAnonymous]
-        [Route("ExternalLogins")]
+        [System.Web.Http.AllowAnonymous]
+        [System.Web.Http.Route("ExternalLogins")]
         public IEnumerable<ExternalLoginViewModel> GetExternalLogins(string returnUrl, bool generateState = false)
         {
             IEnumerable<AuthenticationDescription> descriptions = Authentication.GetExternalAuthenticationTypes();
@@ -319,18 +334,23 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
         }
 
         // POST api/Account/Register
-        [AllowAnonymous]
-        [Route("Register")]
+        [System.Web.Http.AllowAnonymous]
+        [System.Web.Http.Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            TeacherService teacherService = new TeacherService();
+            var teacher = await teacherService.GetTeacher(model.TeacherId);
+            if (teacher == null)
+                return BadRequest();
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, TeacherId =model.TeacherId};
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+            var resultAddRoles = await UserManager.AddToRolesAsync(user.Id, RolesEnum.Teacher);
 
             if (!result.Succeeded)
             {
@@ -338,12 +358,13 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
             }
 
             return Ok();
-        }
+
+}
 
         // POST api/Account/RegisterExternal
-        [OverrideAuthentication]
+        [System.Web.Http.OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [Route("RegisterExternal")]
+        [System.Web.Http.Route("RegisterExternal")]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
         {
             if (!ModelState.IsValid)

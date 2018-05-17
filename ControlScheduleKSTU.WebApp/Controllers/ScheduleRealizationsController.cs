@@ -22,6 +22,7 @@ namespace ControlScheduleKSTU.WebApp.Controllers
         // GET: ScheduleRealizations
         public async Task<ActionResult> Index()
         {
+            ViewBag.Currentschedule = _realizationService.GetCurrentScheduleByTime();
             ViewBag.Title = Resources.MonitoringSchedule;
             return View( await _realizationService.GetScheduleRealizations());
         }

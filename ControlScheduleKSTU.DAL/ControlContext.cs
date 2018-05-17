@@ -1,12 +1,9 @@
+using System.Data.Entity;
 using ControlScheduleKSTU.DomainCore.Models;
+using DayOfWeek = ControlScheduleKSTU.DomainCore.Models.DayOfWeek;
 
 namespace ControlScheduleKSTU.DAL
 {
-    using System;
-    using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
-
     public partial class ControlContext : DbContext
     {
         public ControlContext()
@@ -24,7 +21,8 @@ namespace ControlScheduleKSTU.DAL
         public virtual DbSet<Building> Buildings { get; set; }
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<CourseGroup> CourseGroups { get; set; }
-        public virtual DbSet<DomainCore.Models.DayOfWeek> DayOfWeeks { get; set; }
+        public virtual DbSet<Criterion> Criteria { get; set; }
+        public virtual DbSet<DayOfWeek> DayOfWeeks { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Faculty> Faculties { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
@@ -93,17 +91,17 @@ namespace ControlScheduleKSTU.DAL
                 .WithRequired(e => e.Course)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<DomainCore.Models.DayOfWeek>()
+            modelBuilder.Entity<DayOfWeek>()
                 .HasMany(e => e.Schedules)
                 .WithRequired(e => e.DayOfWeek)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<DomainCore.Models.DayOfWeek>()
+            modelBuilder.Entity<DayOfWeek>()
                 .HasMany(e => e.ScheduleYears)
                 .WithRequired(e => e.DayOfWeek)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<DomainCore.Models.DayOfWeek>()
+            modelBuilder.Entity<DayOfWeek>()
                 .HasMany(e => e.TeacherPersonalTimes)
                 .WithRequired(e => e.DayOfWeek)
                 .WillCascadeOnDelete(false);

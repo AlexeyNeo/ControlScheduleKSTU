@@ -18,6 +18,8 @@ namespace ControlScheduleKSTU.DomainCore.Models
 
         public string Id { get; set; }
 
+        public int? TeacherId { get; set; }
+
         [StringLength(256)]
         public string Email { get; set; }
 
