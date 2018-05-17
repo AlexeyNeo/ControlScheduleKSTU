@@ -66,16 +66,16 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
             var test = User.Identity.GetUserId();
-           // var user =  _context.AspNetUsers.FirstOrDefault(c => c.Id == test);
-         //   var userinfo = await _context.Teachers.FirstOrDefaultAsync(c => c.Id == user.TeacherId);
+            var user =  _context.AspNetUsers.FirstOrDefault(c => c.Id == test);
+            var userinfo = await _context.Teachers.FirstOrDefaultAsync(c => c.Id == user.TeacherId);
             return new UserInfoViewModel
             {
                 Email = User.Identity.GetUserName(),
                 HasRegistered = externalLogin == null,
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null,
-               //UserType = user.AspNetRoles.FirstOrDefault().Name,
-                //LastName = userinfo?.LastName ?? "",
-               // FirstName =userinfo?.FirstName?? ""
+                UserType = user.AspNetRoles.FirstOrDefault().Name,
+                LastName = userinfo?.LastName ?? "",
+                FirstName =userinfo?.FirstName?? ""
 
 
             };

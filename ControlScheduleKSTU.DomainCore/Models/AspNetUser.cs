@@ -14,11 +14,11 @@ namespace ControlScheduleKSTU.DomainCore.Models
             AspNetUserClaims = new HashSet<AspNetUserClaim>();
             AspNetUserLogins = new HashSet<AspNetUserLogin>();
             AspNetRoles = new HashSet<AspNetRole>();
-            Teachers = new HashSet<Teacher>();
-
         }
 
         public string Id { get; set; }
+
+        public int? TeacherId { get; set; }
 
         [StringLength(256)]
         public string Email { get; set; }
@@ -40,7 +40,6 @@ namespace ControlScheduleKSTU.DomainCore.Models
         public bool LockoutEnabled { get; set; }
 
         public int AccessFailedCount { get; set; }
-        public int TeacherId { get; set; }
 
         [Required]
         [StringLength(256)]
@@ -54,7 +53,5 @@ namespace ControlScheduleKSTU.DomainCore.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Teacher> Teachers { get; set; }
     }
 }

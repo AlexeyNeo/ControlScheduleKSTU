@@ -17,15 +17,15 @@ namespace ControlScheduleKSTU.Service.Services
         public  async Task<List<ScheduleRealization>> GetScheduleRealizations()
         {
             //var views = new List<ScheduleRealizationView>();
-            //var schedules = await _context.ScheduleRealizations.Include(s => s.Auditorium).Include(s => s.Schedule).Include(s => s.Teacher).ToListAsync();
+            var schedules = await _context.ScheduleRealizations.Include(s => s.Auditorium).Include(s => s.Schedule).Include(s => s.Teacher).ToListAsync();
             //foreach (var schedule in schedules)
             //{
             //    var view = new ScheduleRealizationView();
-                
+
             //    var teacher = schedule.Schedule.Teacher;
             //    var auditorium = schedule.Schedule.Auditorium;
             //}
-            return null;
+            return schedules;
 
         }
 
