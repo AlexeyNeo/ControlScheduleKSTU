@@ -4,9 +4,34 @@
 
 <div class="panel panel-default">
     <!-- Default panel contents -->
-    <div class="panel-heading">
-        <p>Занятие: №5</p>
-        <p>Текущее время:14:40</p>
+    <div  class="panel-heading">
+        <p>Занятие: №@ViewBag.Currentschedule</p>
+        Текущее время: <b id="txt"></b>
+           
+            <script type="text/javascript">
+                function startTime()
+                {
+                    var tm=new Date();
+                    var h=tm.getHours();
+                    var m=tm.getMinutes();
+                    var s=tm.getSeconds();
+                    m=checkTime(m);
+                    s=checkTime(s);
+                    document.getElementById('txt').innerHTML=h+":"+m+":"+s;
+                    t=setTimeout('startTime()',1000);
+                }
+                function checkTime(i)
+                {
+                    if (i<10)
+                    {
+                        i="0" + i;
+                    }
+                    return i;
+                }
+                 startTime();
+            </script>
+           
+        
     </div>
 <table class="table table-hover">
     <tr>

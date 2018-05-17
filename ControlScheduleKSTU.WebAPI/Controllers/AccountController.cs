@@ -73,7 +73,7 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
                 Email = User.Identity.GetUserName(),
                 HasRegistered = externalLogin == null,
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null,
-               // UserType = user.AspNetRoles.FirstOrDefault().Name,
+               //UserType = user.AspNetRoles.FirstOrDefault().Name,
                 //LastName = userinfo?.LastName ?? "",
                // FirstName =userinfo?.FirstName?? ""
 
