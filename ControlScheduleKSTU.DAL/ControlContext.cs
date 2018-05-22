@@ -308,5 +308,7 @@ namespace ControlScheduleKSTU.DAL
                 .WithRequired(e => e.Year)
                 .WillCascadeOnDelete(false);
         }
+
+       
     }
 }

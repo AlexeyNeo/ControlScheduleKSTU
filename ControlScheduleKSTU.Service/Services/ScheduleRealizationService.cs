@@ -14,18 +14,29 @@ namespace ControlScheduleKSTU.Service.Services
     public class ScheduleRealizationService : IDisposable
     {
         private readonly ControlContext _context = new ControlContext();
-        public  async Task<List<ScheduleRealization>> GetScheduleRealizations()
+        public  async Task<List<ScheduleRealizationView>> GetScheduleRealizations()
         {
-            //var views = new List<ScheduleRealizationView>();
-            var schedules = await _context.ScheduleRealizations.Include(s => s.Auditorium).Include(s => s.Schedule).Include(s => s.Teacher).ToListAsync();
-            //foreach (var schedule in schedules)
-            //{
-            //    var view = new ScheduleRealizationView();
-
-            //    var teacher = schedule.Schedule.Teacher;
-            //    var auditorium = schedule.Schedule.Auditorium;
-            //}
-            return schedules;
+            var views = new List<ScheduleRealizationView>();
+            var schedules = await _context.ScheduleRealizations.ToListAsync();
+            foreach (var schedule in schedules)
+            {
+                var view = new ScheduleRealizationView
+                {
+                    //ActualAuditorium = schedule.Schedule.Auditorium.Name,
+                    Auditorium = schedule.Schedule.Auditorium.Name,
+                    ActualDate = schedule.ActualDate.Value,
+                  //  ActualTeacher = schedule.Teacher.FirstName + schedule.Teacher.LastName ??"",
+                    Teacher = (schedule.Schedule.Teacher.LastName + " " +schedule.Schedule.Teacher.FirstName) ??
+                            schedule.Teacher.LastName + " "+schedule.Teacher.FirstName ,
+                    BeginTime = schedule.BeginTime,
+                    ScheduleName = schedule.Schedule.Subject.FullName,
+                    Description = schedule.Description,
+                    EndTime = schedule.EndTime,
+                  //  Id = schedule.ScheduleId.Value
+                };
+                views.Add(view);
+            }
+            return views;
 
         }
 
@@ -38,12 +49,21 @@ namespace ControlScheduleKSTU.Service.Services
 
         public int GetCurrentScheduleByTime()
         {
-            DateTime currentDate = DateTime.Now;
+            DateTime currentDate = DateTime.Now.ToUniversalTime().AddHours(6);
             var currentTime = TimeSpan.Parse(currentDate.ToString("HH:mm:ss"));
             var schedule = _context.Hours.FirstOrDefault(c => c.End >= currentTime && c.Begin<= currentTime);
             if (schedule == null) return 0;
             return schedule.Number;
         }
+
+        public  void BeginSchedule(string scheduleId)
+        {
+            var schedule = _context.ScheduleRealizations.FirstOrDefault(c => c.Id == scheduleId);
+            if (schedule == null) throw new Exception("Не найдено");
+            schedule.BeginTime = DateTime.Now.TimeOfDay;
+            _context.SaveChanges();
+        }
+       
 
         public void Dispose()
         {

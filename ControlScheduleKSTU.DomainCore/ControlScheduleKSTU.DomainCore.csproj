@@ -51,8 +51,9 @@
   <ItemGroup>
     <Compile Include="Enums\AuditoriumTypeEnum.cs" />
     <Compile Include="Enums\RolesEnum.cs" />
-    <Compile Include="ModelsDto\AuditoriumViewModel.cs" />
-    <Compile Include="ModelsDto\TeacherViewModel.cs" />
+    <Compile Include="ModelsView\AuditoriumViewModel.cs" />
+    <Compile Include="ModelsView\ScheduleReslizationView.cs" />
+    <Compile Include="ModelsView\TeacherViewModel.cs" />
     <Compile Include="Models\AspNetRole.cs" />
     <Compile Include="Models\AspNetUser.cs" />
     <Compile Include="Models\AspNetUserClaim.cs" />

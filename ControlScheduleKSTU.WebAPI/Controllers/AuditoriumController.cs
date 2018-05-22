@@ -20,7 +20,6 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
         // GET api/<controller>
         [HttpGet]
         [Route("api/Auditorium/GetAuditoriumBuilding")]
-       
         //[MyAuthorize(RolesEnum = RolesEnum.Teacher)]
         public async Task<List<AuditoriumViewModel>> GetAuditoriumBuilding(int buildingId)
         {
