@@ -64,9 +64,13 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
         [System.Web.Http.Route("UserInfo")]
         public async Task<UserInfoViewModel> GetUserInfo()
         {
+            try
+            {
+
+        
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-            var test = User.Identity.GetUserId();
-            var user =  _context.AspNetUsers.FirstOrDefault(c => c.Id == test);
+            var userId = User.Identity.GetUserId();
+            var user = await  _context.AspNetUsers.FirstOrDefaultAsync(c => c.Id == userId);
             var userinfo = await _context.Teachers.FirstOrDefaultAsync(c => c.Id == user.TeacherId);
             return new UserInfoViewModel
             {
@@ -79,6 +83,12 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
 
 
             };
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         // POST api/Account/Logout
@@ -355,10 +365,9 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
-            }
+            } 
 
             return Ok();
-
 }
 
         // POST api/Account/RegisterExternal

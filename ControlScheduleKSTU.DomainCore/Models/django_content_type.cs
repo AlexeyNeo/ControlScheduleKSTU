@@ -6,31 +6,29 @@ namespace ControlScheduleKSTU.DomainCore.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("AuditoriumType")]
-    public partial class AuditoriumType
+    public partial class django_content_type
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AuditoriumType()
+        public django_content_type()
         {
-            Auditoriums = new HashSet<Auditorium>();
-            AuditoriumSubjectTypes = new HashSet<AuditoriumSubjectType>();
+            auth_permission = new HashSet<auth_permission>();
+            django_admin_log = new HashSet<django_admin_log>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public byte Id { get; set; }
+        public int id { get; set; }
 
         [Required]
-        [StringLength(15)]
-        public string Name { get; set; }
+        [StringLength(100)]
+        public string app_label { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string FullName { get; set; }
+        [StringLength(100)]
+        public string model { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Auditorium> Auditoriums { get; set; }
+        public virtual ICollection<auth_permission> auth_permission { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AuditoriumSubjectType> AuditoriumSubjectTypes { get; set; }
+        public virtual ICollection<django_admin_log> django_admin_log { get; set; }
     }
 }

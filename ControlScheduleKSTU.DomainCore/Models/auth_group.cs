@@ -6,31 +6,25 @@ namespace ControlScheduleKSTU.DomainCore.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("AuditoriumType")]
-    public partial class AuditoriumType
+    public partial class auth_group
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AuditoriumType()
+        public auth_group()
         {
-            Auditoriums = new HashSet<Auditorium>();
-            AuditoriumSubjectTypes = new HashSet<AuditoriumSubjectType>();
+            auth_group_permissions = new HashSet<auth_group_permissions>();
+            auth_user_groups = new HashSet<auth_user_groups>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public byte Id { get; set; }
+        public int id { get; set; }
 
         [Required]
-        [StringLength(15)]
-        public string Name { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string FullName { get; set; }
+        [StringLength(80)]
+        public string name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Auditorium> Auditoriums { get; set; }
+        public virtual ICollection<auth_group_permissions> auth_group_permissions { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AuditoriumSubjectType> AuditoriumSubjectTypes { get; set; }
+        public virtual ICollection<auth_user_groups> auth_user_groups { get; set; }
     }
 }

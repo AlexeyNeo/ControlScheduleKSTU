@@ -8,5 +8,6 @@ namespace ControlScheduleKSTU.DomainCore.Enums
         Admin = 1,
         Student = 2,
         Teacher = 4,
+        Manager = 6
     }
 }

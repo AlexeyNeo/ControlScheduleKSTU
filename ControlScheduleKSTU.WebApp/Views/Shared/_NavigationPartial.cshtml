@@ -6,5 +6,19 @@
                     <li>@Html.ActionLink("О программе", "About", "Home")</li>
                     <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>*@
                 <li>@Html.ActionLink(@Resources.MonitoringSchedule, "Index", "ScheduleRealizations")</li>
-            </ul>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="False">Отчеты<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            @Html.ActionLink("Отчет по не проведенным парам преподавателя", "Index", "ScheduleRealizations")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Отчет по не проведенным парам преподавателей", "Index", "ScheduleRealizations")
+                       
+                        </li>
+                    </ul>
+                </li>
+                </ul>
    }

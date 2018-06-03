@@ -12,6 +12,7 @@ namespace ControlScheduleKSTU.DomainCore.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SubjectType()
         {
+            AuditoriumSubjectTypes = new HashSet<AuditoriumSubjectType>();
             Raschasovkas = new HashSet<Raschasovka>();
             RaschasovkaYears = new HashSet<RaschasovkaYear>();
             Schedules = new HashSet<Schedule>();
@@ -26,6 +27,9 @@ namespace ControlScheduleKSTU.DomainCore.Models
 
         [StringLength(40)]
         public string FullName { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AuditoriumSubjectType> AuditoriumSubjectTypes { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Raschasovka> Raschasovkas { get; set; }

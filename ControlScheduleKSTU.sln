@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{7ADF1810-7044-4B28-A227-794CCB2A751D}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlScheduleKSTU.DomainCore", "ControlScheduleKSTU.DomainCore\ControlScheduleKSTU.DomainCore.csproj", "{62E72A21-1548-4E58-A97E-20C400C07532}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlScheduleKSTU.DAL", "ControlScheduleKSTU.DAL\ControlScheduleKSTU.DAL.csproj", "{6BBD7BA5-253E-4DD6-8C57-E8CE0F7243AD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlScheduleKSTU.Service", "ControlScheduleKSTU.Service\ControlScheduleKSTU.Service.csproj", "{E66F77FE-2F23-4CB9-9571-F7C96ABDB5C5}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{7ADF1810-7044-4B28-A227-794CCB2A751D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlScheduleKSTU.WebApp", "ControlScheduleKSTU.WebApp\ControlScheduleKSTU.WebApp.csproj", "{0FEE9A54-BADB-4537-9CC2-5CC227DBD52D}"
 EndProject

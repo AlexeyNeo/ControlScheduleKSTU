@@ -17,7 +17,7 @@ namespace ControlScheduleKSTU.DomainCore.Models
 
         public int Id { get; set; }
 
-        public int Potok { get; set; }
+        public int? Potok { get; set; }
 
         public byte CourseId { get; set; }
 
@@ -39,6 +39,8 @@ namespace ControlScheduleKSTU.DomainCore.Models
 
         public byte NumberOfStudents { get; set; }
 
+        public byte SubjectClassId { get; set; }
+
         public virtual Auditorium Auditorium { get; set; }
 
         public virtual Course Course { get; set; }
@@ -50,6 +52,8 @@ namespace ControlScheduleKSTU.DomainCore.Models
         public virtual Semester Semester { get; set; }
 
         public virtual Subject Subject { get; set; }
+
+        public virtual SubjectClass SubjectClass { get; set; }
 
         public virtual SubjectType SubjectType { get; set; }
 

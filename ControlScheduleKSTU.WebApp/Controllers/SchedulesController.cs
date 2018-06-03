@@ -19,7 +19,7 @@ namespace ControlScheduleKSTU.WebApp.Controllers
         // GET: Schedules
         public async Task<ActionResult> Index()
         {
-            var schedules = db.Schedules.Include(s => s.Auditorium).Include(s => s.DayOfWeek).Include(s => s.Group).Include(s => s.Hour).Include(s => s.Semester).Include(s => s.Subject).Include(s => s.SubjectType).Include(s => s.Teacher).Include(s => s.Week);
+            var schedules = db.Schedules.Include(s => s.Auditorium).Include(s => s.DayOfWeek).Include(s => s.Group).Include(s => s.Hour).Include(s => s.Semester).Include(s => s.Subject).Include(s => s.SubjectType).Include(s => s.Teacher);
             return View(await schedules.ToListAsync());
         }
 
@@ -75,7 +75,7 @@ namespace ControlScheduleKSTU.WebApp.Controllers
             ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "Name", schedule.SubjectId);
             ViewBag.SubjectTypeId = new SelectList(db.SubjectTypes, "Id", "Name", schedule.SubjectTypeId);
             ViewBag.TeacherId = new SelectList(db.Teachers, "Id", "FirstName", schedule.TeacherId);
-            ViewBag.WeekId = new SelectList(db.Weeks, "Id", "Id", schedule.WeekId);
+            
             return View(schedule);
         }
 
@@ -99,7 +99,7 @@ namespace ControlScheduleKSTU.WebApp.Controllers
             ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "Name", schedule.SubjectId);
             ViewBag.SubjectTypeId = new SelectList(db.SubjectTypes, "Id", "Name", schedule.SubjectTypeId);
             ViewBag.TeacherId = new SelectList(db.Teachers, "Id", "FirstName", schedule.TeacherId);
-            ViewBag.WeekId = new SelectList(db.Weeks, "Id", "Id", schedule.WeekId);
+
             return View(schedule);
         }
 
@@ -124,7 +124,7 @@ namespace ControlScheduleKSTU.WebApp.Controllers
             ViewBag.SubjectId = new SelectList(db.Subjects, "Id", "Name", schedule.SubjectId);
             ViewBag.SubjectTypeId = new SelectList(db.SubjectTypes, "Id", "Name", schedule.SubjectTypeId);
             ViewBag.TeacherId = new SelectList(db.Teachers, "Id", "FirstName", schedule.TeacherId);
-            ViewBag.WeekId = new SelectList(db.Weeks, "Id", "Id", schedule.WeekId);
+           
             return View(schedule);
         }
 

@@ -13,7 +13,7 @@ namespace ControlScheduleKSTU.DomainCore.Models
         public Week()
         {
             RaschasovkaWeeks = new HashSet<RaschasovkaWeek>();
-            Schedules = new HashSet<Schedule>();
+            ScheduleWeeks = new HashSet<ScheduleWeek>();
             ScheduleYears = new HashSet<ScheduleYear>();
         }
 
@@ -28,7 +28,7 @@ namespace ControlScheduleKSTU.DomainCore.Models
         public virtual ICollection<RaschasovkaWeek> RaschasovkaWeeks { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Schedule> Schedules { get; set; }
+        public virtual ICollection<ScheduleWeek> ScheduleWeeks { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ScheduleYear> ScheduleYears { get; set; }

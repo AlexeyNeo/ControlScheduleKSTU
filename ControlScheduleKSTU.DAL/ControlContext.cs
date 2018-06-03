@@ -17,13 +17,24 @@ namespace ControlScheduleKSTU.DAL
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Auditorium> Auditoriums { get; set; }
+        public virtual DbSet<AuditoriumSubjectType> AuditoriumSubjectTypes { get; set; }
         public virtual DbSet<AuditoriumType> AuditoriumTypes { get; set; }
+        public virtual DbSet<auth_group> auth_group { get; set; }
+        public virtual DbSet<auth_group_permissions> auth_group_permissions { get; set; }
+        public virtual DbSet<auth_permission> auth_permission { get; set; }
+        public virtual DbSet<auth_user> auth_user { get; set; }
+        public virtual DbSet<auth_user_groups> auth_user_groups { get; set; }
+        public virtual DbSet<auth_user_user_permissions> auth_user_user_permissions { get; set; }
         public virtual DbSet<Building> Buildings { get; set; }
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<CourseGroup> CourseGroups { get; set; }
         public virtual DbSet<Criterion> Criteria { get; set; }
         public virtual DbSet<DayOfWeek> DayOfWeeks { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<django_admin_log> django_admin_log { get; set; }
+        public virtual DbSet<django_content_type> django_content_type { get; set; }
+        public virtual DbSet<django_migrations> django_migrations { get; set; }
+        public virtual DbSet<django_session> django_session { get; set; }
         public virtual DbSet<Faculty> Faculties { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Hour> Hours { get; set; }
@@ -32,12 +43,13 @@ namespace ControlScheduleKSTU.DAL
         public virtual DbSet<RaschasovkaYear> RaschasovkaYears { get; set; }
         public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<ScheduleRealization> ScheduleRealizations { get; set; }
+        public virtual DbSet<ScheduleWeek> ScheduleWeeks { get; set; }
         public virtual DbSet<ScheduleYear> ScheduleYears { get; set; }
         public virtual DbSet<Semester> Semesters { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
+        public virtual DbSet<SubjectClass> SubjectClasses { get; set; }
         public virtual DbSet<SubjectDepartment> SubjectDepartments { get; set; }
         public virtual DbSet<SubjectType> SubjectTypes { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<TeacherDepartment> TeacherDepartments { get; set; }
         public virtual DbSet<TeacherPersonalTime> TeacherPersonalTimes { get; set; }
@@ -74,6 +86,58 @@ namespace ControlScheduleKSTU.DAL
             modelBuilder.Entity<Auditorium>()
                 .HasMany(e => e.ScheduleYears)
                 .WithRequired(e => e.Auditorium)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<AuditoriumType>()
+                .HasMany(e => e.Auditoriums)
+                .WithRequired(e => e.AuditoriumType)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<AuditoriumType>()
+                .HasMany(e => e.AuditoriumSubjectTypes)
+                .WithRequired(e => e.AuditoriumType)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<auth_group>()
+                .HasMany(e => e.auth_group_permissions)
+                .WithRequired(e => e.auth_group)
+                .HasForeignKey(e => e.group_id)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<auth_group>()
+                .HasMany(e => e.auth_user_groups)
+                .WithRequired(e => e.auth_group)
+                .HasForeignKey(e => e.group_id)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<auth_permission>()
+                .HasMany(e => e.auth_group_permissions)
+                .WithRequired(e => e.auth_permission)
+                .HasForeignKey(e => e.permission_id)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<auth_permission>()
+                .HasMany(e => e.auth_user_user_permissions)
+                .WithRequired(e => e.auth_permission)
+                .HasForeignKey(e => e.permission_id)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<auth_user>()
+                .HasMany(e => e.auth_user_groups)
+                .WithRequired(e => e.auth_user)
+                .HasForeignKey(e => e.user_id)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<auth_user>()
+                .HasMany(e => e.auth_user_user_permissions)
+                .WithRequired(e => e.auth_user)
+                .HasForeignKey(e => e.user_id)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<auth_user>()
+                .HasMany(e => e.django_admin_log)
+                .WithRequired(e => e.auth_user)
+                .HasForeignKey(e => e.user_id)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Course>()
@@ -126,6 +190,17 @@ namespace ControlScheduleKSTU.DAL
                 .WithRequired(e => e.Department)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<django_content_type>()
+                .HasMany(e => e.auth_permission)
+                .WithRequired(e => e.django_content_type)
+                .HasForeignKey(e => e.content_type_id)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<django_content_type>()
+                .HasMany(e => e.django_admin_log)
+                .WithOptional(e => e.django_content_type)
+                .HasForeignKey(e => e.content_type_id);
+
             modelBuilder.Entity<Group>()
                 .HasMany(e => e.CourseGroups)
                 .WithRequired(e => e.Group)
@@ -173,6 +248,11 @@ namespace ControlScheduleKSTU.DAL
             modelBuilder.Entity<Raschasovka>()
                 .HasMany(e => e.RaschasovkaWeeks)
                 .WithRequired(e => e.Raschasovka)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Schedule>()
+                .HasMany(e => e.ScheduleWeeks)
+                .WithRequired(e => e.Schedule)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ScheduleRealization>()
@@ -224,9 +304,19 @@ namespace ControlScheduleKSTU.DAL
                 .WithRequired(e => e.Subject)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<SubjectClass>()
+                .HasMany(e => e.Raschasovkas)
+                .WithRequired(e => e.SubjectClass)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<SubjectType>()
                 .Property(e => e.FullName)
                 .IsFixedLength();
+
+            modelBuilder.Entity<SubjectType>()
+                .HasMany(e => e.AuditoriumSubjectTypes)
+                .WithRequired(e => e.SubjectType)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<SubjectType>()
                 .HasMany(e => e.Raschasovkas)
@@ -289,7 +379,7 @@ namespace ControlScheduleKSTU.DAL
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Week>()
-                .HasMany(e => e.Schedules)
+                .HasMany(e => e.ScheduleWeeks)
                 .WithRequired(e => e.Week)
                 .WillCascadeOnDelete(false);
 
