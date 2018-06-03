@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ControlScheduleKSTU.DomainCore.Enums;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -156,7 +157,7 @@ namespace ControlScheduleKSTU.WebApp.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    var resultAddRoles = await UserManager.AddToRolesAsync(user.Id, RolesEnum.Manager);
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Отправка сообщения электронной почты с этой ссылкой
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

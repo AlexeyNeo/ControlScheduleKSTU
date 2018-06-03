@@ -13,14 +13,18 @@ namespace ControlScheduleKSTU.DomainCore.ModelsView
     {
         public int Id { get; set; }
         [Display(Name = "Дата проведения")]
-        [DataType(DataType.Date)]
+       
         //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{dd-mm-yyyy}")]
+        [DataType(DataType.Date)]
+
         public DateTime ActualDate { get; set; }
+        //[DataType(DataType.Time)]
+        //[DisplayFormat(DataFormatString = "{hh:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "Время начала")]
-        public TimeSpan? BeginTime { get; set; }
+        public string BeginTime { get; set; }
 
         [Display(Name = "Время окончания")]
-        public TimeSpan? EndTime { get; set; }
+        public string EndTime { get; set; }
 
         public string ScheduleId { get; set; }
         [Display(Name = "Описание")]

@@ -2,12 +2,12 @@
 @model IEnumerable<ControlScheduleKSTU.DomainCore.ModelsView.ScheduleRealizationView>
 
 
-<h2>@ViewBag.Title</h2>
+<h2>@ViewBag.title</h2>
 
 <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading">
-        <p>Занятие: №@ViewBag.Currentschedule</p>
+        <p>Занятие по счету: @ViewBag.Currentschedule</p>
         Текущее время: <b id="txt"></b>
 
         <script type="text/javascript">

@@ -13,6 +13,7 @@ namespace ControlScheduleKSTU.DomainCore.Models
         public Schedule()
         {
             ScheduleRealizations = new HashSet<ScheduleRealization>();
+            ScheduleWeeks = new HashSet<ScheduleWeek>();
         }
 
         public int Id { get; set; }
@@ -26,8 +27,6 @@ namespace ControlScheduleKSTU.DomainCore.Models
         public int TeacherId { get; set; }
 
         public short AuditoriumId { get; set; }
-
-        public byte WeekId { get; set; }
 
         [Column(TypeName = "smalldatetime")]
         public DateTime? LastChange { get; set; }
@@ -56,9 +55,10 @@ namespace ControlScheduleKSTU.DomainCore.Models
 
         public virtual Teacher Teacher { get; set; }
 
-        public virtual Week Week { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ScheduleRealization> ScheduleRealizations { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ScheduleWeek> ScheduleWeeks { get; set; }
     }
 }

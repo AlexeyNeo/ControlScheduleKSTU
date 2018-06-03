@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using ControlScheduleKSTU.DomainCore.Enums;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -86,6 +87,11 @@ namespace ControlScheduleKSTU.WebApp
             }
             return manager;
         }
+        public async Task<IdentityResult> AddToRolesAsync(string id, RolesEnum rolesEnum)
+        {
+            string[] roles = rolesEnum.ToString().Split(',').Select(r => r.Trim()).ToArray();
+            return await this.AddToRolesAsync(id, roles);
+        }
     }
 
     // Настройка диспетчера входа для приложения.
@@ -105,5 +111,6 @@ namespace ControlScheduleKSTU.WebApp
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
+
     }
 }

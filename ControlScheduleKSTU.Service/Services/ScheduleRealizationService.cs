@@ -20,6 +20,12 @@ namespace ControlScheduleKSTU.Service.Services
             var schedules = await _context.ScheduleRealizations.ToListAsync();
             foreach (var schedule in schedules)
             {
+                string timeBegin = "--";
+                string temeEnd = "--";
+                if (schedule.BeginTime != null)
+                     timeBegin = String.Format("{0:HH:mm:ss}", new DateTime(schedule.BeginTime.Value.Ticks));
+                if(schedule.EndTime != null)
+                    temeEnd = String.Format("{0:HH:mm:ss}", new DateTime(schedule.BeginTime.Value.Ticks));
                 var view = new ScheduleRealizationView
                 {
                     //ActualAuditorium = schedule.Schedule.Auditorium.Name,
@@ -27,11 +33,11 @@ namespace ControlScheduleKSTU.Service.Services
                     ActualDate = schedule.ActualDate.Value,
                   //  ActualTeacher = schedule.Teacher.FirstName + schedule.Teacher.LastName ??"",
                     Teacher = (schedule.Schedule.Teacher.LastName + " " +schedule.Schedule.Teacher.FirstName) ??
-                            schedule.Teacher.LastName + " "+schedule.Teacher.FirstName ,
-                    BeginTime = schedule.BeginTime,
+                    schedule.Teacher.LastName + " "+schedule.Teacher.FirstName ,
+                    BeginTime = timeBegin,
                     ScheduleName = schedule.Schedule.Subject.FullName,
                     Description = schedule.Description,
-                    EndTime = schedule.EndTime,
+                    EndTime = temeEnd,
                   //  Id = schedule.ScheduleId.Value
                 };
                 views.Add(view);
@@ -47,23 +53,30 @@ namespace ControlScheduleKSTU.Service.Services
             return scheduleRealization;
         }
 
-        public int GetCurrentScheduleByTime()
+        public async Task<int> GetCurrentScheduleByTime()
         {
             DateTime currentDate = DateTime.Now.ToUniversalTime().AddHours(6);
             var currentTime = TimeSpan.Parse(currentDate.ToString("HH:mm:ss"));
-            var schedule = _context.Hours.FirstOrDefault(c => c.End >= currentTime && c.Begin<= currentTime);
+            var schedule = await _context.Hours.FirstOrDefaultAsync(c => c.End >= currentTime && c.Begin<= currentTime);
             if (schedule == null) return 0;
             return schedule.Number;
         }
 
-        public  void BeginSchedule(string scheduleId)
+        public  void  BeginSchedule(string scheduleId)
         {
             var schedule = _context.ScheduleRealizations.FirstOrDefault(c => c.Id == scheduleId);
             if (schedule == null) throw new Exception("Не найдено");
             schedule.BeginTime = DateTime.Now.TimeOfDay;
             _context.SaveChanges();
         }
-       
+        public void EndSchedule(string scheduleId)
+        {
+            var schedule =  _context.ScheduleRealizations.FirstOrDefault(c => c.Id == scheduleId);
+            if (schedule == null) throw new Exception("Не найдено");
+            schedule.EndTime = DateTime.Now.TimeOfDay;
+            _context.SaveChanges();
+        }
+
 
         public void Dispose()
         {

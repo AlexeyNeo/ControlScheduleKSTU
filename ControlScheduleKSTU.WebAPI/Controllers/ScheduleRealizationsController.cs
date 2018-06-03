@@ -16,7 +16,7 @@ using ControlScheduleKSTU.Service.Services;
 
 namespace ControlScheduleKSTU.WebAPI.Controllers
 {
-
+    
     public class ScheduleRealizationsController : ApiController
     {
         private readonly ScheduleRealizationService _scheduleRealization = new ScheduleRealizationService();
@@ -28,10 +28,17 @@ namespace ControlScheduleKSTU.WebAPI.Controllers
         //{
         //    return _scheduleRealization.
         //}
-        [Route("api/Teacher/GetScheduleRealizations")]
-        public void GetScheduleRealizations(string id)
+        [HttpGet]
+        [Route("api/Teacher/StartSchedule")]
+        public  void StartSchedule(string id)
         {
-              _scheduleRealization.BeginSchedule(id);
+             _scheduleRealization.BeginSchedule(id);
+        }
+        [HttpGet]
+        [Route("api/Teacher/EndSchedule")]
+        public  void EndSchedule(string id)
+        {
+            _scheduleRealization.EndSchedule(id);
         }
     }
 }

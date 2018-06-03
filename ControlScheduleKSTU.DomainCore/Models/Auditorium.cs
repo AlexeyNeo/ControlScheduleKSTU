@@ -31,7 +31,7 @@ namespace ControlScheduleKSTU.DomainCore.Models
 
         public short SeatingCapacity { get; set; }
 
-        public byte? AuditoriumTypeId { get; set; }
+        public byte AuditoriumTypeId { get; set; }
 
         public byte? BuildingId { get; set; }
 
